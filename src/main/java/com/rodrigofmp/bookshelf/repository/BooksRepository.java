@@ -31,5 +31,4 @@ public interface BooksRepository extends JpaRepository<Book, Long>, JpaSpecifica
 	@Query(name="Book.findById", nativeQuery = true)
 	@RestResource(exported = false)
 	Optional<Book> findById(@Param("id") long id);
-	
 }
