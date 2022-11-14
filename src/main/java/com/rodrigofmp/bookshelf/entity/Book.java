@@ -1,27 +1,43 @@
 package com.rodrigofmp.bookshelf.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import lombok.Data;
 
 @Entity(name="Books")
-@Data
 public class Book {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column
-	@NotNull(message="{NotNull.Book.name}")
-	@JsonSerialize
 	private String name;
-	
-	@Column
-	@NotNull(message="{NotNull.Book.author}")
-	@JsonSerialize
 	private String author;
+	
+	public Book() {}
+	
+	public Book(String name, String author) {
+		this.name = name;
+		this.author = author;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 }

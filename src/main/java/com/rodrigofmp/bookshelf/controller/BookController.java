@@ -1,0 +1,49 @@
+package com.rodrigofmp.bookshelf.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rodrigofmp.bookshelf.dto.BookDto;
+import com.rodrigofmp.bookshelf.entity.Book;
+import com.rodrigofmp.bookshelf.service.BookService;
+
+@RestController
+@RequestMapping("/bookshelf")
+public class BookController {
+
+	private BookService bookService = null;
+
+	BookController(BookService bookService) {
+		this.bookService = bookService;
+	}
+
+	@GetMapping("/books")
+	List<Book> all() {
+		return bookService.getBooks();
+	}
+
+	@PostMapping("/books")
+	Book newBook(@RequestBody BookDto bookDto) {
+		return bookService.createBook(bookDto);
+	}
+	
+	@PostMapping("/books/{id}")
+	Book saveBook(@RequestBody BookDto bookDto, @PathVariable Long id) {
+		return bookService.saveBook(bookDto, id);
+	}
+	
+	@DeleteMapping("/books/{id}")
+	void deleteBook(@PathVariable Long id) {
+		bookService.deleteBook(id);
+	}	
+
+
+
+}
