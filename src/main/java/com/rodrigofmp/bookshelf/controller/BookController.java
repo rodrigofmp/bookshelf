@@ -15,7 +15,7 @@ import com.rodrigofmp.bookshelf.entity.Book;
 import com.rodrigofmp.bookshelf.service.BookService;
 
 @RestController
-@RequestMapping("/bookshelf")
+@RequestMapping("/bookshelf/")
 public class BookController {
 
 	private BookService bookService = null;
