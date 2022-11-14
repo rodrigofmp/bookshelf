@@ -1,7 +1,6 @@
 package com.rodrigofmp.bookshelf.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -25,8 +24,9 @@ public class BookService {
 	}
 
 	public Book getBook(long id) {
-		Optional<Book> book = booksRepository.findById(id);
-		return book.get();
+		return booksRepository.findById(id).map(book -> {
+			return book;
+		}).orElseThrow(() -> new BookNotFoundException(id));
 	}
 
 	public Book createBook(BookDto bookDto) {
@@ -35,7 +35,7 @@ public class BookService {
 		return booksRepository.save(book);
 	}
 
-	public Book saveBook(BookDto bookDto, long id) {
+	public Book updateBook(BookDto bookDto, long id) {
 		return booksRepository.findById(id).map(book -> {
 			book.setName(bookDto.getName());
 			book.setAuthor(bookDto.getAuthor());

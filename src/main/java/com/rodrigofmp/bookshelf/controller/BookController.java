@@ -28,15 +28,20 @@ public class BookController {
 	List<Book> all() {
 		return bookService.getBooks();
 	}
+	
+	@GetMapping("/books/{id}")
+	Book get(@PathVariable Long id) {
+		return bookService.getBook(id);
+	}	
 
 	@PostMapping("/books")
-	Book newBook(@RequestBody BookDto bookDto) {
+	Book createBook(@RequestBody BookDto bookDto) {
 		return bookService.createBook(bookDto);
 	}
 	
 	@PostMapping("/books/{id}")
-	Book saveBook(@RequestBody BookDto bookDto, @PathVariable Long id) {
-		return bookService.saveBook(bookDto, id);
+	Book updateBook(@RequestBody BookDto bookDto, @PathVariable Long id) {
+		return bookService.updateBook(bookDto, id);
 	}
 	
 	@DeleteMapping("/books/{id}")
